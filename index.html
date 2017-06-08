@@ -1,0 +1,586 @@
+<!--
+Parspooyesh - MongoDB Introduction
+Author: Amin Solhizadeh <a.solhizadeh@parspooyesh.com>
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" media="all" href="theme/css/default.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+    <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+    <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+  </head>
+  <body style="opacity: 0">
+    <slides class="layout-widescreen">
+      <slide class="logoslide nobackground">
+		<article class="flexbox vcenter">
+		  <span><img src="images/git_logo.png"></span>
+		</article>
+      </slide>
+
+      <slide class="title-slide segue nobackground">
+		<aside class="gdbar"><img src="images/git_icon.png"></aside>
+		<!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+		<hgroup class="auto-fadein">
+		  <h1 data-config-title><!-- populated from slide_config.json --></h1>
+		  <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+		  <p data-config-presenter><!-- populated from slide_config.json --></p>
+		</hgroup>
+      </slide>
+
+      <slide class="segue dark nobackground">
+		<aside class="gdbar"><img src="images/git_icon.png"></aside>
+		<hgroup class="auto-fadein">
+		  <h2>Overview</h2>
+		</hgroup>
+      </slide>
+      
+      <slide>
+		<hgroup>
+		  <h2>Differences</h2>
+		</hgroup>
+		<article>
+		  <div align="middle">
+			<img src="images/differences.png" class="reflect" alt="Differences" title="Differences">
+		  </div>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Snapshots</h2>
+		</hgroup>
+		<article>
+		  <div align="middle">
+			<img src="images/snapshots.png" alt="Snapshots" title="Snapshots">
+			<br/><br/>
+			<h3><b>This is how Git works!</b></h3>
+		  </div>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Git Features</h2>
+		</hgroup>
+		<article>
+		  <ul class="build">
+			<li>Nearly Every Operation is Local</li>
+			<li>Git Has Integrity</li>
+			<li>Git Generally Only Adds Data</li>
+		  </ul>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>The Three States</h2>
+		</hgroup>
+		<article>
+		  <div align="middle">
+			<img src="images/states.png" alt="Git states" title="Git States">
+		  </div>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Git Configurations</h2>
+		</hgroup>
+		<article>
+		  <p>Your identity</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git config --global user.name "Amin Solhizadeh"
+$ git config --global user.email a.solhizadeh@parspooyesh.com
+		  </pre>
+
+		  <p>Your editor</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git config --global core.editor emacs
+		  </pre>
+		</article>
+	  </slide>
+
+      <slide class="segue dark nobackground">
+		<aside class="gdbar"><img src="images/git_icon.png"></aside>
+		<hgroup class="auto-fadein">
+		  <h2>Getting Started with Git</h2>
+		  <h3>Git command line</h3>
+		</hgroup>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Repositories</h2>
+		</hgroup>
+		<article>
+		  <p>Creating your own repository</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ cd /home/amin/my-repo
+$ git init			
+		  </pre>
+
+		  <p>Cloning an existing repository</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git clone http://a.solhizadeh@bitbucket.parspooyesh.com/scm/ibsng/ibsng.git
+		  </pre>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>File States</h2>
+		</hgroup>
+		<article>
+		  <ul class="build">
+			<li>Untracked</li>
+			<li>Tracked</li>
+			<ul>
+			  <li>Unmodified</li>
+			  <li>Modified</li>
+			  <li>Staged</li>
+			</ul>
+		  </ul>
+		  <div align="middle">
+			<img src="images/file_states.png" alt="File states" title="File States">
+		  </div>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>File States (Cont.)</h2>
+		</hgroup>
+		<article class="smaller">
+		  <p>Untracked: A file you didn't have in your previous snapshot</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ echo "I am learning Git!" > README
+$ git status
+		  </pre>
+
+		  <p>Track new file (Also stages modified files)</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git add README
+$ git status
+		  </pre>
+
+		  <p>Commit your changes</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git commit
+		  </pre>
+
+		  <p>All in ONE</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git commit -a -m 'My Initial Commit'
+		  </pre>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>See the Changes</h2>
+		</hgroup>
+		<article>
+		  <p>What is in your working directory but not in your staging area</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git diff
+		  </pre>
+
+		  <p>What is in your staging area but not in your last commit</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git diff --staged
+		  </pre>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Undo</h2>
+		</hgroup>
+		<article>
+		  <p>Unstaging a staged file</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git reset HEAD README
+		  </pre>
+
+		  <p>Unmodifying a modified file</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout -- README
+		  </pre>
+		</article>
+      </slide>
+
+	  <slide class="segue dark nobackground">
+		<aside class="gdbar"><img src="images/git_icon.png"></aside>
+		<hgroup class="auto-fadein">
+		  <h2>Git Remotes</h2>
+		  <h3>Working with remote repositories</h3>
+		</hgroup>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Not Local Repository == Remote Repository</h2>
+		</hgroup>
+		<article>
+		  <div align="middle">
+			<img src="images/remote_states.png" width="100%" alt="Git remote states" title="Git Remote States">
+		  </div>
+		</article>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Git Remote Commands</h2>
+		</hgroup>
+		<article class="smaller">
+		  <p>Showing your remotes</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git remote -v
+		  </pre>
+
+		  <p>Adding remote repositories</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git remote add amin-repo http://a.solhizadeh@bitbucket.parspooyesh.com/scm/~a.solhizadeh/ibsng.git
+		  </pre>
+
+		  <p>Fetching and pulling your remotes</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git fetch amin-repo
+$ git pull amin-repo			
+		  </pre>
+
+		  <p>Pushing your remotes</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git push amin-repo master	
+		  </pre>
+		</article>
+	  </slide>
+
+	  <slide class="segue dark nobackground">
+		<aside class="gdbar"><img src="images/git_icon.png"></aside>
+		<hgroup class="auto-fadein">
+		  <h2>Git Branches</h2>
+		  <h3>Working with branches</h3>
+		</hgroup>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Add Branch</h2>
+		</hgroup>
+		<article>
+		  <p>Create new branch</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git branch testing
+		  </pre>
+		  <div align="middle">
+			<img src="images/new_branch.png" width="60%" alt="New branch" title="New Branch">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Switch Branch</h2>
+		</hgroup>
+		<article class="smaller">
+		  <p>Switch to new branch</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout testing
+		  </pre>
+		  <div align="middle">
+			<img src="images/switch_branch.png" width="40%" alt="Switch branch" title="Switch Branch">
+		  </div>
+
+		  <p>Shortcut (add and switch to new branch)</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout -b testing
+		  </pre>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Commit on Branch</h2>
+		</hgroup>
+		<article class="smaller">
+		  <p>Commit on new branch</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ echo "made changes!" >> "README"
+$ git commit -a -m "Made a Change"			
+		  </pre>
+		  <div align="middle">
+			<img src="images/commit_new_branch.png" alt="Commit on new branch" title="Commit on New Branch">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Commit on Branch (Cont.)</h2>
+		</hgroup>
+		<article class="smaller">
+		  <p>Commit on base branch</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout master
+$ echo "made changes again!" >> "README"
+$ git commit -a -m "Also Made a Change"			
+		  </pre>
+		  <div align="middle">
+			<img src="images/commit_base_branch.png" width="70%" alt="Commit on base branch" title="Commit on Base Branch">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Merge</h2>
+		</hgroup>
+		<article>
+		  <p>Suppose we have following repository</p>
+		  <div align="middle">
+			<img src="images/before_merge.png" alt="Before merge" title="Before Merge">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Merge (Cont.)</h2>
+		</hgroup>
+		<article>
+		  <p>We want to merge 'iss53' into 'master'</p>
+		  <div align="middle">
+			<img src="images/merge_explained.png" alt="Merge explained" title="Merge Explained">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Merge (Cont.)</h2>
+		</hgroup>
+		<article>
+		  <p>Merge branch 'iss53' into 'master'</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout master
+$ git merge iss53
+$ git branch -d iss53
+		  </pre>
+		  <div align="middle">
+			<img src="images/after_merge.png" alt="After merge" title="After Merge">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Merge in Real World</h2>
+		</hgroup>
+		<article>
+		  <p>Suppose we have following scenario</p>
+		  <div align="middle">
+			<img src="images/advanced_merge_1.png" width="60%" alt="Advanced merge 1" title="Advanced Merge 1">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Merge in Real World (Cont.)</h2>
+		</hgroup>
+		<article>
+		  <p>We want to drop 'iss91' but keep the other two</p>
+		  <div align="middle">
+			<img src="images/advanced_merge_2.png" width="45%" alt="Advanced merge 2" title="Advanced Merge 2">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Rebase vs Merge</h2>
+		</hgroup>
+		<article>
+		  <p>Suppose we have following scenario</p>
+		  <div align="middle">
+			<img src="images/rebase_vs_merge_1.png" alt="Rebase vs Merge 1" title="Rebase vs Merge 1">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Rebase vs Merge (Cont.)</h2>
+		</hgroup>
+		<article>
+		  <p>If we merge 'experiment' into 'master'</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout master
+$ git merge experiment
+		  </pre>
+		  <div align="middle">
+			<img src="images/rebase_vs_merge_2.png" alt="Rebase vs Merge 2" title="Rebase vs Merge 2">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Rebase vs Merge (Cont.)</h2>
+		</hgroup>
+		<article>
+		  <p>What if we rebase 'experiment' against 'master'</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout experiment
+$ git rebase master
+		  </pre>
+		  <div align="middle">
+			<img src="images/rebase_vs_merge_3.png" alt="Rebase vs Merge 3" title="Rebase vs Merge 3">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Rebase vs Merge (Cont.)</h2>
+		</hgroup>
+		<article>
+		  <p>Rebasing makes our merging more cleaner!</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout master
+$ git merge experiment
+		  </pre>
+		  <div align="middle">
+			<img src="images/rebase_vs_merge_4.png" alt="Rebase vs Merge 4" title="Rebase vs Merge 4">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide class="segue dark nobackground">
+		<aside class="gdbar"><img src="images/git_icon.png"></aside>
+		<hgroup class="auto-fadein">
+		  <h2>Contributing to a Project</h2>
+		</hgroup>
+      </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Clone and Start Working</h2>
+		</hgroup>
+		<article>
+		  <p>Clone main project</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git clone <project-url>
+$ cd project
+		  </pre>
+
+		  <p>Create a feature branch and start working</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout -b featureA
+(work)
+$ git commit
+(work)
+$ git commit
+		  </pre>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Put Your Work on Your Own Fork</h2>
+		</hgroup>
+		<article>
+		  <p>Add your own fork and push your feature to it</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git remote add myfork <fork-url>
+$ git push myfork featureA
+		  </pre>
+
+		  <p>Add another feature</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout -b featureB origin/master
+(work)
+$ git commit
+$ git push myfork featureB
+		  </pre>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>What State Do We Are In!</h2>
+		</hgroup>
+		<article>
+		  <p>Get the latest changes on main project</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git fetch origin
+		  </pre>
+
+		  <div align="middle">
+			<img src="images/contribute_before.png" alt="Before contribute" title="Before Contribute">
+		  </div>
+		</article>
+	  </slide>
+
+	  <slide>
+		<hgroup>
+		  <h2>Sending Pull Request</h2>
+		</hgroup>
+		<article>
+		  <p>Rebase 'featureA' and then send pull request</p>
+		  <pre class="prettyprint" data-lang="shell">
+$ git checkout featureA
+$ git rebase origin/master
+$ git push -f myfork featureA
+(send pull request)
+		  </pre>
+
+		  <div align="middle">
+			<img src="images/contribute_after.png" alt="After contribute" title="After Contribute">
+		  </div>
+		</article>
+	  </slide>
+
+      <slide class="thank-you-slide segue nobackground">
+		<aside class="gdbar right"><img src="images/git_icon.png"></aside>
+		<article class="flexbox vleft auto-fadein">
+		  <h2>Thank You</h2>
+		</article>
+		<p class="auto-fadein" data-config-contact>
+		  <!-- populated from slide_config.json -->
+		</p>
+      </slide>
+      
+      <slide class="backdrop"></slide>
+    </slides>
+
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    
+    <!--[if IE]>
+	<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+	<script>CFInstall.check({mode: 'overlay'});</script>
+    <![endif]-->
+  </body>
+</html>
